@@ -20,18 +20,14 @@ if (!isset($_SESSION)) {
     $nom_prenoms_clt =   $_SESSION['ariane_user_identite'] ;
     $cel = (isset($_POST['cel'])) ? $_SESSION['cel'] =  $_POST['cel'] : "";
     $montant = (isset($_POST['montant'])) ? $_SESSION['montant'] =  $_POST['montant'] : "";
-    //INSERTIN DE LA DEMANDE DU CLIENT DANS LA BD
-    $insertSQL = "INSERT INTO alerts_voyages(numero_vol,date_depart,heure_debut_vol,mode_paiement,telephone,idClient,statut,montant,date_creation) VALUES ('$vol', '$date_depart','$heure','$mode_paiement','$cel',$idClient,'0','$montant',now())";
-    mysql_select_db($database_liaisondb, $liaisondb);
-    $Result1 = mysql_query($insertSQL, $liaisondb) or die(mysql_error());
-    $last_insert = mysql_insert_id();
+
     //Envoie des emails aux admins(On recupere tout les emails des admins.)
     mysql_select_db($database_liaisondb, $liaisondb);
     $query_rsOperations = "SELECT comptes.email FROM comptes INNER JOIN groupes ON comptes.idg = groupes.idg WHERE groupes.libg = 'Super administrateur' ";
     $rsOperations = mysql_query($query_rsOperations, $liaisondb) or die(mysql_error());
     $row_rsOperations = mysql_fetch_assoc($rsOperations);
     $totalSuperAdmin = mysql_num_rows($rsOperations);
-    if($Result1){
+    //if($Result1){
         $mail = new PHPMailer(); // crzeate a new object
         $mail->CharSet = 'utf-8';
         $mail->IsSMTP(); // enable SMTP
@@ -58,12 +54,18 @@ if (!isset($_SESSION)) {
         {
             echo "<div class='alert alert-error'><button type='button' class='close' data-dismiss='alert'>&times;</button>La transmission de votre demande a échoué... Veuillez recommencer !</div>";
 
-            $updateSQL = "DELETE FROM alerts_voyages WHERE alerts_voyages.id='$last_insert'";
-            mysql_select_db($database_liaisondb, $liaisondb);
-            $Result1 = mysql_query($updateSQL, $liaisondb) or die(mysql_error());
+//            $updateSQL = "DELETE FROM alerts_voyages WHERE alerts_voyages.id='$last_insert'";
+//            mysql_select_db($database_liaisondb, $liaisondb);
+//            $Result1 = mysql_query($updateSQL, $liaisondb) or die(mysql_error());
 
             unset($mail);
         }else{
+
+            //INSERTIN DE LA DEMANDE DU CLIENT DANS LA BD
+            $insertSQL = "INSERT INTO alerts_voyages(numero_vol,date_depart,heure_debut_vol,mode_paiement,telephone,idClient,statut,montant,date_creation) VALUES ('$vol', '$date_depart','$heure','$mode_paiement','$cel',$idClient,'0','$montant',now())";
+            mysql_select_db($database_liaisondb, $liaisondb);
+            $Result1 = mysql_query($insertSQL, $liaisondb) or die(mysql_error());
+            //$last_insert = mysql_insert_id();
 
             /************** SENDING SMS **********************/
            $sms = new API();
@@ -101,7 +103,7 @@ if (!isset($_SESSION)) {
             //Suppression des variables de session
             unset($_SESSION['verification']);
         }
-    }
+   // }
 }
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
