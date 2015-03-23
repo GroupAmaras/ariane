@@ -373,7 +373,7 @@ function MM_swapImage() { //v3.0
             <div style="margin-left:260px;">
                 
                 <div class="titre" style="margin-bottom:20px; padding:10px 0;">
-                Espace client &raquo; Alertes voyages</div>
+               Alertes voyages &raquo; <strong>Numero d'alerte et de paiement des frais.</strong></div>
 				<div style="background:url(img/separe_.png) no-repeat; height:15px; padding-top:20px;"></div>
 
                 
@@ -395,7 +395,7 @@ function MM_swapImage() { //v3.0
   <label class="control-label" for="mpaie">Moyen de paiement</label>
     <div class="controls">
         <?php
-           if(trim($_SESSION['mpaie']) === 'ORANGEMoney'){
+           if(trim($_SESSION['mpaie']) === 'Orange Money'){
                ?>
                   <img src="images/orangemoney.png" <?php RedImage("images/orangemoney.png",116,0); ?> />
               <?php
@@ -403,10 +403,14 @@ function MM_swapImage() { //v3.0
                ?>
                   <img src="images/flooz_over.png" <?php RedImage("images/flooz_over.png",116,0); ?> />
               <?php
-           }elseif(trim($_SESSION['mpaie']) === 'MobileMoney'){
+           }elseif(trim($_SESSION['mpaie']) === 'Mobile Money'){
                ?>
                   <img src="images/mtnmoney_over.png" <?php RedImage("images/mtnmoney_over.png",116,0); ?> />
                <?php
+           }elseif(trim($_SESSION['mpaie']) === 'PAYPAL'){
+             ?>
+               <img src="images/paypal_over.png" <?php RedImage("images/paypal_over.png",116,0); ?> />
+           <?php
            }
         ?>
     </div>
@@ -426,7 +430,7 @@ function MM_swapImage() { //v3.0
   <label class="control-label" for="cel">N° cellulaire <span class="rouge">*</span></label>
     <div class="controls"><a name="cell" id="cell"></a>
       <input name="cel" type="tel" required class="input-small" id="cel" placeholder="00000000" maxlength="8">
-       <span class="label label-warning"><?php if(isset($_SESSION['error_num'])){ echo $_SESSION['error_num']; } ?></span>
+       <span class="label label-info"><?php if(isset($_SESSION['error_num'])){ echo $_SESSION['error_num']; } ?></span>
     </div>
 </div>
     <!-- FORM HIDDEN-->

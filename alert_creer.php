@@ -3,7 +3,6 @@
 <?php require_once('Class/PHPMailerAutoload.php'); ?>
 <?php require_once('sms/API.php'); ?>
 
-<?php $msg = "Demande transmise avec succès.Elle sera traitée immédiatement.Nous vous notifierons par SMS pour le paiement des frais de services par Orange  Money afin d'activer votre Alerte voyage."; ?>
 <?php
 if (!isset($_SESSION)) {
     session_name('arianefo');
@@ -12,15 +11,20 @@ if (!isset($_SESSION)) {
          $urlPre = 'alerte.php';
          header("Location: " . $urlPre );
      }
-    $mode_paiement = (isset($_POST['mpaie'])) ? $_SESSION['mpaie'] =  $_POST['mpaie'] : "";
-    $idClient = (isset($_POST['idClient'])) ? $_SESSION['idClient'] =  $_POST['idClient'] : "";
-    $date_depart = (isset($_POST['ddepart'])) ? $_SESSION['ddepart'] =  $_POST['ddepart'] : "".'<br/>';
-    $vol = (isset($_POST['vol'])) ? $_SESSION['vol'] =  $_POST['vol'] : "";
-    $heure = (isset($_POST['Heurevol'])) ? $_SESSION['Heurevol'] =  $_POST['Heurevol'] : "";
+    $mode_paiement = $_SESSION['mpaie'] ;
+    $idClient =  $_SESSION['idClient'] ;
+    $date_depart =  $_SESSION['ddepart'];
+    $vol =  $_SESSION['vol'] ;
+    $heure = $_SESSION['Heurevol'] ;
     $nom_prenoms_clt =   $_SESSION['ariane_user_identite'] ;
-    $cel = (isset($_POST['cel'])) ? $_SESSION['cel'] =  $_POST['cel'] : "";
-    $montant = (isset($_POST['montant'])) ? $_SESSION['montant'] =  $_POST['montant'] : "";
-
+    $cel = $_SESSION['cel'] ;
+    $montant =  $_SESSION['montant'] ;
+    $numero_flooz = '02851258';
+    if($mode_paiement === 'Flooz'){
+        $msg = "Demande transmise avec succès.Elle sera traitée immédiatement.Veuillez nous transmettre les frais de services sur ce numéro: $numero_flooz par $mode_paiement afin d'activer votre Alerte voyage.";
+    }else{
+        $msg = "Demande transmise avec succès.Elle sera traitée immédiatement.Nous vous notifierons par SMS pour le paiement des frais de services par $mode_paiement afin d'activer votre Alerte voyage.";
+    }
     //Envoie des emails aux admins(On recupere tout les emails des admins.)
     mysql_select_db($database_liaisondb, $liaisondb);
     $query_rsOperations = "SELECT comptes.email FROM comptes INNER JOIN groupes ON comptes.idg = groupes.idg WHERE groupes.libg = 'Super administrateur' ";
@@ -523,7 +527,7 @@ if (isset($_SESSION['ariane_user_id'])) {
                                                 <td>Procédure de paiement :</td>
                                                 <td>
                                                     <?php
-                                                    if(trim($_SESSION['mpaie']) === 'ORANGEMoney'){
+                                                    if(trim($_SESSION['mpaie']) === 'Orange Money'){
                                                         ?>
                                                         <img src="images/orangemoney.png" <?php RedImage("images/orangemoney.png",116,0); ?> />
                                                     <?php
@@ -531,9 +535,13 @@ if (isset($_SESSION['ariane_user_id'])) {
                                                         ?>
                                                         <img src="images/flooz_over.png" <?php RedImage("images/flooz_over.png",116,0); ?> />
                                                     <?php
-                                                    }elseif(trim($_SESSION['mpaie']) === 'MobileMoney'){
+                                                    }elseif(trim($_SESSION['mpaie']) === 'Mobile Money'){
                                                         ?>
                                                         <img src="images/mtnmoney_over.png" <?php RedImage("images/mtnmoney_over.png",116,0); ?> />
+                                                    <?php
+                                                    }elseif(trim($_SESSION['mpaie']) === 'PAYPAL'){
+                                                        ?>
+                                                        <img src="images/paypal_over.png" <?php RedImage("images/paypal_over.png",116,0); ?> />
                                                     <?php
                                                     }
                                                     ?>

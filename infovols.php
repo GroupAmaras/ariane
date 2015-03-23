@@ -288,7 +288,7 @@ function MM_swapImage() { //v3.0
             </div>
             <div style="margin-left:260px;">
                 
-                <div class="titre" style="margin-bottom:20px; padding:10px 0;">Espace client &raquo; Alertes voyages &raquo; Facturation du services</div>
+                <div class="titre" style="margin-bottom:20px; padding:10px 0;">Alertes voyages &raquo; <strong >Facturation du services</strong></div>
 				<div style="background: url(img/separe_.png) no-repeat; height:15px; padding-top:20px;"></div>
 
                 <!--<div id="flash"></div>

@@ -325,7 +325,7 @@ $totalRows_rsNumVols = mysql_num_rows($rsNumVols);
                     </div>
                     <div style="margin-left:260px;">
 
-                        <div class="titre" style="margin-bottom:20px; padding:10px 0;">Espace client &raquo; Alertes voyages</div>
+                        <div class="titre" style="margin-bottom:20px; padding:10px 0;"><strong>Alertes voyages</strong></div>
                         <div style="background: url(img/separe_.png) no-repeat; height:15px; padding-top:20px;"></div>
 
                         <!--<div id="flash"></div>

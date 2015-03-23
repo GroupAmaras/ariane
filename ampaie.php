@@ -328,7 +328,7 @@ function MM_swapImage() { //v3.0
             </div>
             <div style="margin-left:260px;">
                 
-                <div class="titre" style="margin-bottom:20px; padding:10px 0;">Espace client&nbsp;&raquo;&nbsp;Choix du moyen de paiements</div>
+                <div class="titre" style="margin-bottom:20px; padding:10px 0;">Alertes voyages &raquo; <strong>Mode de paiements</strong></div>
 				<div style="background: url(img/separe_.png) no-repeat; height:15px; padding-top:20px;"></div>
                 
               <div>
@@ -338,7 +338,7 @@ function MM_swapImage() { //v3.0
   <tr>
     <td>
     <div align="center">
-      <input type="radio" name="mpaie" id="mpaie1" value="ORANGEMoney" required="required" checked/>
+      <input type="radio" name="mpaie" id="mpaie1" value="Orange Money" required="required" />
     </div>
     </td>
     <td>
@@ -348,26 +348,35 @@ function MM_swapImage() { //v3.0
     </td>
     <td><label for="mpaie1">ORANGE Money</label></td>
     </tr>
-  <!--<tr>
+  <tr>
     <td>
       <div align="center">
-        <input type="radio" name="mpaie" id="mpaie3" value="Flooz" required="required" disabled="disabled" />
+        <input type="radio" name="mpaie" id="mpaie3" value="Flooz" required="required"  />
         </div>
       </td>
     <td><label for="mpaie3"><div align="center"><img src="images/flooz_over.png" width="69" height="34" /></div></label></td>
-    <td><label for="mpaie3">Flooz (Bientôt disponible)</label></td>
+    <td><label for="mpaie3">Flooz </label></td>
   </tr>
   <tr>
     <td>
       <div align="center">
-        <input type="radio" name="mpaie" id="mpaie5" value="MobileMoney " required="required"  disabled="disabled"/>
+        <input type="radio" name="mpaie" id="mpaie5" value="Mobile Money" required="required"  />
         </div>
       </td>
     <td><label for="mpaie5"><div align="center"><img src="images/mtnmoney_over.png" width="35%" height="10%" /></div></label></td>
-    <td><label for="mpaie5">Mobile Money (Bientôt disponible)</label></td>
-  </tr>-->
+    <td><label for="mpaie5">Mobile Money </label></td>
+  </tr>
+    <tr>
+        <td>
+            <div align="center">
+                <input type="radio" name="mpaie" id="mpaie6" value="PAYPAL " required="required"  />
+            </div>
+        </td>
+        <td><label for="mpaie6"><div align="center"><img src="images/paypal_over.png" width="35%" height="10%" /></div></label></td>
+        <td><label for="mpaie6">Paypal (Bientôt disponible)</label></td>
+    </tr>
 </table>
-    <br/><b>NB: (Orange Money par défaut)</b>
+
     <!-- FORM HIDDEN-->
         <?php require "forms/form_infos_alert.php"; ?>
     <!-- FORM HIDDEN -->

@@ -22,7 +22,7 @@ class API {
         $nexmo_sms = new NexmoMessage($key, $secret);
 
         // Step 2: Use sendText( $to, $from, $message ) method to send a message.
-        $info = $nexmo_sms->sendText('+225'.$telephone, 'ESN - ARIANE', $message );
+        $info = $nexmo_sms->sendText('+225'.$telephone, 'ESN-ARIANE', $message );
         // Step 3: Display an overview of the message
         $nexmo_sms->displayOverview($info);
         // Done!

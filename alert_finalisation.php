@@ -10,21 +10,50 @@ if (!isset($_SESSION)) {
         $urlPre = 'alerte.php';
         header("Location: " . $urlPre );
     }
-    $cel = $_POST['cel'] ;
-    if (preg_match("#^07|^08|^09|^47|^48|^49|^57|^58|^59|^77|^78|^79#", $cel))
-    {
-        (isset($_POST['ddepart'])) ? $_SESSION['ddepart'] =  $_POST['ddepart'] : "".'<br/>';
-        (isset($_POST['vol'])) ? $_SESSION['vol'] =  $_POST['vol'] : "";
-        (isset($_POST['Heurevol'])) ? $_SESSION['Heurevol'] =  $_POST['Heurevol'] : "";
-        (isset($_POST['Minuitevol'])) ? $_SESSION['Minuitevol'] =  $_POST['Minuitevol'] : "";
-        (isset($_POST['montant'])) ? $_SESSION['montant'] =  $_POST['montant'] : "";
-        (isset($_POST['cel'])) ? $_SESSION['cel'] =  $cel  : "";
-        $verification = 1 ;
 
-    }else{
-      $_SESSION['error_num'] = 'Numéro incorrect.Entrer un numéro Orange SVP';
-      $urlPre = 'alert_validation_mode_paiement.php';
-      header("Location: " . $urlPre );
+    $orange = "#^07|^08|^09|^47|^48|^49|^57|^58|^59|^77|^78|^79#";
+    $moov   = "#^01|^02|03|^41|^42|^43#";
+    $mtn    = "#^04|^05|^06|^44|^45|^46|^74|^75|^76#";
+
+
+    $cel = $_POST['cel'] ;
+    $_SESSION['cel'] = $cel ;
+    if (trim($_SESSION['mpaie']) === 'Orange Money')
+    {
+        if(preg_match($orange, $cel)){
+
+            $verification = 1 ;
+        }else{
+            $_SESSION['error_num'] = 'Numéro incorrect.Entrer un numéro Orange SVP';
+            $urlPre = 'alert_validation_mode_paiement.php';
+            header("Location: " . $urlPre );
+        }
+
+
+    }elseif (trim($_SESSION['mpaie']) === 'Flooz')
+    {
+        if(preg_match($moov, $cel)){
+
+            $verification = 1 ;
+        }else{
+            $_SESSION['error_num'] = 'Numéro incorrect.Entrer un numéro Moov SVP';
+            $urlPre = 'alert_validation_mode_paiement.php';
+            header("Location: " . $urlPre );
+        }
+
+
+    }elseif (trim($_SESSION['mpaie']) === 'Mobile Money')
+    {
+        if(preg_match($mtn, $cel)){
+
+            $verification = 1 ;
+        }else{
+            $_SESSION['error_num'] = 'Numéro incorrect.Entrer un numéro MTN SVP';
+            $urlPre = 'alert_validation_mode_paiement.php';
+            header("Location: " . $urlPre );
+        }
+
+
     }
 }
 $MM_authorizedUsers = "";
@@ -423,7 +452,7 @@ function MM_swapImage() { //v3.0
             <div style="margin-left:260px;">
                 
                 <div class="titre" style="margin-bottom:20px; padding:10px 0;">
-                Espace client &raquo; Alertes voyages &raquo; Confirmation</div>
+                    Alertes voyages &raquo; <strong>Confirmation de la souscription.</strong></div>
 				<div style="background:url(img/separe_.png) no-repeat; height:15px; padding-top:20px;"></div>
 
                 <div id="flash"></div>
@@ -455,7 +484,7 @@ function MM_swapImage() { //v3.0
                    <td>Mode de paiement choisir:</td>
                    <td>
                        <?php
-                       if(trim($_SESSION['mpaie']) === 'ORANGEMoney'){
+                       if(trim($_SESSION['mpaie']) === 'Orange Money'){
                            ?>
                            <img src="images/orangemoney.png" <?php RedImage("images/orangemoney.png",116,0); ?> />
                        <?php
@@ -463,9 +492,13 @@ function MM_swapImage() { //v3.0
                            ?>
                            <img src="images/flooz_over.png" <?php RedImage("images/flooz_over.png",116,0); ?> />
                        <?php
-                       }elseif(trim($_SESSION['mpaie']) === 'MobileMoney'){
+                       }elseif(trim($_SESSION['mpaie']) === 'Mobile Money'){
                            ?>
                            <img src="images/mtnmoney_over.png" <?php RedImage("images/mtnmoney_over.png",116,0); ?> />
+                       <?php
+                       }elseif(trim($_SESSION['mpaie']) === 'PAYPAL'){
+                       ?>
+                           <img src="images/paypal_over.png" <?php RedImage("images/paypal_over.png",116,0); ?> />
                        <?php
                        }
                        ?>
@@ -483,9 +516,6 @@ function MM_swapImage() { //v3.0
     <?php require "forms/form_infos_alert.php"; ?>
     <!-- FORM HIDDEN -->
     <input type="hidden" name="verification" value="OK"/>
-    <input type="hidden" name="mpaie" value="<?= $_SESSION['mpaie']; ?> "/>
-    <input type="hidden" name="montant" value="<?= $_SESSION['montant']; ?> "/>
-    <input type="hidden" name="cel" value="<?= $_SESSION['cel']; ?> "/>
     <input type="hidden" name="idClient" value="<?= $_SESSION['ariane_user_id'] ;?> "/>
     <input type="hidden" name="identite_clt" value="<?= $_SESSION['ariane_user_identite'] ;?> "/>
     <input type="hidden" name="identite_clt" value="<?= $verification ?> "/>
