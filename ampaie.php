@@ -360,16 +360,17 @@ function MM_swapImage() { //v3.0
   <tr>
     <td>
       <div align="center">
-        <input type="radio" name="mpaie" id="mpaie5" value="Mobile Money" required="required"  />
+        <input type="radio" name="mpaie" id="mpaie5" value="Mobile Money" required="required" disabled="disabled"/>
         </div>
       </td>
     <td><label for="mpaie5"><div align="center"><img src="images/mtnmoney_over.png" width="35%" height="10%" /></div></label></td>
-    <td><label for="mpaie5">Mobile Money </label></td>
+    <td><label for="mpaie5">Mobile Money (Bientôt disponible)    <td><label for="mpaie5">Mobile Money </label></td>
+        </label></td>
   </tr>
     <tr>
         <td>
             <div align="center">
-                <input type="radio" name="mpaie" id="mpaie6" value="PAYPAL " required="required"  />
+                <input type="radio" name="mpaie" id="mpaie6" value="PAYPAL " required="required"  disabled="disabled"  />
             </div>
         </td>
         <td><label for="mpaie6"><div align="center"><img src="images/paypal_over.png" width="35%" height="10%" /></div></label></td>

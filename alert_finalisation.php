@@ -490,7 +490,9 @@ function MM_swapImage() { //v3.0
                        <?php
                        }elseif(trim($_SESSION['mpaie']) === 'Flooz'){
                            ?>
-                           <img src="images/flooz_over.png" <?php RedImage("images/flooz_over.png",116,0); ?> />
+                           <img src="images/flooz_over.png" <?php RedImage("images/flooz_over.png",116,0); ?> /><br/><br/>
+                           <div class="alert alert-info">Avant soumission de votre demande d'alerte voyage, veuillez transférer le montant à prélever pour règlement des frais de service au n° FLOOZ (225) 039 54 291 ou à ARIANE en tapant sur votre téléphone *155*3*4# et suivez les instructions.</div>
+
                        <?php
                        }elseif(trim($_SESSION['mpaie']) === 'Mobile Money'){
                            ?>

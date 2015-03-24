@@ -21,7 +21,7 @@ if (!isset($_SESSION)) {
     $montant =  $_SESSION['montant'] ;
     $numero_flooz = '02851258';
     if($mode_paiement === 'Flooz'){
-        $msg = "Demande transmise avec succès.Elle sera traitée immédiatement.Veuillez nous transmettre les frais de services sur ce numéro: $numero_flooz par $mode_paiement afin d'activer votre Alerte voyage.";
+        $msg = "Demande transmise avec succès.Elle sera traitée immédiatement.Veuillez transférer le montant à prélever pour règlement des frais de service au n° FLOOZ (225) 039 54 291 ou à ARIANE en tapant sur votre téléphone *155*3*4# et suivez les instructions.";
     }else{
         $msg = "Demande transmise avec succès.Elle sera traitée immédiatement.Nous vous notifierons par SMS pour le paiement des frais de services par $mode_paiement afin d'activer votre Alerte voyage.";
     }
@@ -533,7 +533,9 @@ if (isset($_SESSION['ariane_user_id'])) {
                                                     <?php
                                                     }elseif(trim($_SESSION['mpaie']) === 'Flooz'){
                                                         ?>
-                                                        <img src="images/flooz_over.png" <?php RedImage("images/flooz_over.png",116,0); ?> />
+                                                        <img src="images/flooz_over.png" <?php RedImage("images/flooz_over.png",116,0); ?> /><br/><br/>
+                                                        <div class="alert alert-info">Après soumission de votre demande d'alerte voyage, veuillez transférer le montant à prélever pour règlement des frais de service au n° FLOOZ (225) 039 54 291 ou à ARIANE en tapant sur votre téléphone *155*3*4# et suivez les instructions.Afin d'activer votre alerte voyage.</div>
+
                                                     <?php
                                                     }elseif(trim($_SESSION['mpaie']) === 'Mobile Money'){
                                                         ?>
